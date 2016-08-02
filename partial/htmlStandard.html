@@ -1,0 +1,231 @@
+  <div ui-syntax-highlighter>
+    <h2>HTML规范</h2>
+    <div class="unit">     
+      <h3>基本设置</h3>
+      <ul>
+        <li class="strong">2空格缩进</li>
+        <li class="strong">UTF-8 编码</li>
+      </ul>
+    </div>
+
+    <div class="unit">     
+      <h3>基本约定</h3>
+      <ul>      
+        <li>
+          <p class="strong">推荐使用<code>&lt!DOCTYPE html&gt</code> 作为唯一的 DTD。</p>
+          <p>理由：简洁，并能在所有浏览器触发标准模式</p>
+        </li>
+        <li>
+          <p class="strong">推荐使用 <code>&ltmeta charset="UTF-8" /&gt</code> 指定文件编码。</p>
+          <p>理由：只设置 charset 即可，不需要 Content-Type</p>
+        </li>
+        <li>
+          <p class="strong">页面title是极为重要的不可缺少的一项</p>
+          <p>理由：便于SEO</p>
+        </li>
+        <li>
+          <p class="strong">给图片添加 alt 属性。</p>
+          <p class="strong">给无文字超连接添加 title 属性。</p>
+          <p class="strong">给可视听的替换型元素内添加描述。</p>
+          <p>理由：加强“资源型”内容的可访问性和可用性，加强“不可见”内容的可访问性。</p>
+        </li>
+        <script type="syntaxhighlighter" class="brush: xml">
+          <![CDATA[
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <meta charset="utf-8" />
+                <title>NEC：更好的CSS方案</title>
+                <meta name="keywords" content="" />
+                <meta name="description" content="" />
+              </head>
+              <body>
+                <img src="" alt="我是一张图片" />
+                <a href="" title="我是一段链接">我是一段链接</a>
+                <audio>这是一段神奇的音效</audio>
+                <canvas>这是一个神奇的效果</canvas>
+                <iframe src="http://ele.me">这是 ele.me 的首页</iframe>
+              </body>
+            </html>
+              
+          ]]>
+        </script>
+      </ul>
+    </div>
+
+    <div class="unit">
+      <h3>属性约定</h3>
+      <ul>
+         <li>
+          <p class="strong">所有标签和属性名称一律小写。</p>
+          <p>理由：如果不这么做可能导致与 Angular 的不兼容。</p>
+        </li>
+        <li>
+          <p class="strong">属性值一律使用双引号。</p>
+          <p>理由：为了统一。</p>
+        </li>
+        <li>
+          <p class="strong">建议无值属性不写等号和值。</p>
+          <p>理由：没有必要，DOM操作时可能会写。</p>
+          <script type="syntaxhighlighter" class="brush: xml">
+            <![CDATA[
+              <input type="checkbox" checked />
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">所有 <code>&lta&gt</code> 必须有 <code>href</code> 属性，如果用不到可以置为 <code>href="JavaScript:"</code>。</p>
+          <p>理由：href 不是可选属性，只是浏览器能解析而已。</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="unit">
+      <h3>严格嵌套</h3>
+      <ul>
+        <li>
+          <p class="strong">内联元素不能包含块级元素。</p>
+          <p>理由：尽可能以最严格的xhtml strict标准来嵌套</p>
+        </li>
+        <li>
+          <p class="strong">正确闭合标签且必须闭合。</p>
+          <p>理由：会影响到外部标记语言的解析。</p>
+          <script type="syntaxhighlighter" class="brush: xml">
+            <![CDATA[
+              <svg width="200" height="200">
+                <!-- 如果此处 rect 末尾没有斜杠会产生嵌套关系，使 circle 无法显示 -->
+                <rect width="200" height="200" fill="#000" />
+                <circle cx="100" cy="100" r="100" fill="#fff" />
+              </svg>
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">建议自结束标签包含属性时在结束的斜杆前面加空格。</p>
+          <p>理由：为了代码好看</p>
+          <script type="syntaxhighlighter" class="brush: xml">
+            <![CDATA[
+              <input type="text" />
+              <hr />
+            ]]>
+          </script>
+        </li>
+      </ul>
+    </div>
+
+    <div class="unit">
+      <h3>树形结构</h3>
+      <ul>
+        <li>
+          <p class="strong">每一个块级元素都另起一行，每一行都使用Tab缩进对齐,删除冗余的行尾的空格。</p>
+          <p>理由：保持结构清晰，易于维护。</p>
+        </li>
+        <li>
+          <p class="strong">使用2个空格代替一个tab</p>
+          <p>理由：为了统一。</p>
+        </li>
+        <li>
+          <p class="strong">尽可能地简化 HTML 结构。</p>
+          <p>理由：太复杂的结构难以维护。结构上如果可以并列书写<code>&ltdiv&gt&lt/div&gt&ltdiv&gt&lt/div&gt</code>，就不要嵌套<code>&ltdiv&gt&ltdiv&gt&lt/div&gt&lt/div&gt</code>。如果结构已经可以满足视觉和语义的要求<code>&ltdiv&gt&lth2&gt&lt/h2&gt&lt/div&gt</code>，那么就不要有额外的冗余的结构<code>&ltdiv&gt&ltdiv&gt&lth2&gt&lt/h2&gt&lt/div&gt&lt/div&gt</code>。</p>
+        </li>
+        <li>
+          <p class="strong">一个标签上引用的className不要过多，越少越好。</p>
+          <p>比如不要出现这种情况：<code>&ltdiv class="class1 class2 class3 class4"&gt&lt/div&gt</code></p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="unit">
+      <h3>代码注释</h3>
+      <ul>
+        <li>
+          <p class="strong">说明文案的注释方法:采用类似标签闭合的写法，与HTML统一格式；注释文案两头空格，与CSS注释统一格式。</p>
+          <ul>
+            <li>开始注释：<code>&lt!-- 注释文案 --&gt</code>（文案两头空格）。</li>
+            <li>结束注释：<code>&lt!-- /注释文案 --&gt</code>（文案前加“/”符号，类似标签的闭合）。</li>
+            <li>允许只有开始注释！</li>
+          </ul>
+          <script type="syntaxhighlighter" class="brush: xml">
+            <![CDATA[
+              <!-- 头部 -->
+              <div class="head">
+                <!-- LOGO -->
+                <h1 class="head-logo"><a href="#">LOGO</a></h1>
+                <!-- 导航 -->
+                <ul class="head-nav">
+                    <li><a href="#">NAV1</a></li>
+                    <li><a href="#">NAV2</a></li>
+                    <!-- 更多导航项 -->
+                </ul>
+                <!-- /导航 -->
+              </div>
+              <!-- /头部 -->
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">代码本身的注释方法:单行代码的注释保持同行，两端空格；多行代码的注释起始和结尾都另起一行并左缩进对齐。</p>
+          <script type="syntaxhighlighter" class="brush: xml">
+            <![CDATA[
+              <!-- <h1 class="m-logo"><a href="#">LOGO</a></h1> -->
+              <!--
+              <ul class="m-nav">
+                  <li><a href="#">NAV1</a></li>
+                  <li><a href="#">NAV2</a></li>
+              </ul>
+              -->
+            ]]>
+          </script>
+        </li>
+      </ul>
+    </div>
+
+    <div class="unit">
+      <h3>DOM相关</h3>
+      <ul>
+        <li>
+          <p class="strong">建议不使用 Level 0 的事件绑定。</p>
+          <p>理由：Level 0 的事件绑定是非规范的，而且容易发生冲突。</p>
+          <script type="syntaxhighlighter" class="brush: xml">
+            <![CDATA[
+              <!-- html 文件 -->
+              <button id="btn" onclick="onBtnClick()">click</button>                           
+            ]]>
+          </script>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // js 文件             
+              // not good
+              var onBtnClick=function () {};
+              btn.onclick = onBtnClick;
+            ]]>
+          </script>
+          <p>但是，addEventListener / attachEvent 需要做兼容处理，推荐使用框架封装。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // jQuery 方案
+              $("#btn").click(function () {});                          
+            ]]>
+          </script>
+          <script type="syntaxhighlighter" class="brush: xml">
+            <![CDATA[
+              <!-- Angular 方案 -->
+              <button id="btn" ng-click="onBtnClick()">click</button>                           
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">不在视图中处理复杂逻辑，事件处理代码过长时做成函数。</p>
+          <p>理由：在视图中堆积逻辑会影响代码阅读。</p>
+           <script type="syntaxhighlighter" class="brush: xml">
+            <![CDATA[
+              <!-- not good -->
+              <button id="btn" ng-click="'这里有很多逻辑代码'">click</button>
+              <!-- good -->
+              <button id="btn" ng-click="onBtnClick()">click</button>                          
+            ]]>
+          </script>
+        </li>
+      </ul>
+    </div>
+  </div>

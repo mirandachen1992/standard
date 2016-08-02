@@ -1,0 +1,444 @@
+<div ui-syntax-highlighter>
+  <h2>HTML规范</h2>
+    <div class="unit">
+      <h3>基本设置</h3>
+      <ul>
+        <li class="strong">2空格缩进</li>
+        <li class="strong">UTF-8 编码</li>
+        <li class="strong">建议打开严格模式<code>'use strict';</code></li>
+      </ul>
+    </div>
+    <div class="unit">
+      <h3>空白与格式</h3>
+      <ul>
+        <li class="strong">
+          <p>在二元和三元运算符的符号与操作数之间添加空格。</p>
+          <p>在非行末的<code>,</code> <code>;</code> <code>}</code> 后添加空格，在 <code>{</code> 前添加空格。
+          <p>在每个逻辑块中间添加空白行。</p> 
+          <p>特别的，在 if、while 等关键字后加空格，与函数调用做区分。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              var foo='bar',hello=foo+2,test=true;
+              function hi(){
+                // ...
+              }
+              if(foo&&hello){
+                // ...
+              }else if(foo){
+                // ...
+              }else if(! test){
+                // ...
+              }
+
+              // good
+              var foo = 'bar';
+              var hello = foo + 2;
+              var test = true;
+
+              function hi(arg1, arg2) {
+                // ...
+              }
+
+              if (foo && hello) {
+                // ...
+              } else if (foo) {
+                // ...
+              } else if (!test) {
+                // ...
+              }
+            ]]>
+          </script>
+        </li>
+          
+        <li class="strong">
+          <p>使用单引号，这样可以跟 HTML 的双引号更好的一起工作。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              var foo = 'bar';
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">在语句的结尾加分号。</p>
+          <p>理由：避免代码压缩后有坑。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              var fn = function() {
+                // ...
+              } // 没有分号
+
+              // good
+              var fn = function() {
+                // ...
+              }; // 这里有分号
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">不要为大括号另开一行。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              if (foo)
+              {
+                // ...
+              }
+
+              // good
+              if (foo) {
+                // ...
+              }
+
+              // avoid
+              return
+              {
+                a: 1
+              };
+
+              // ok
+              return {
+                a: 1
+              };
+            ]]>
+          </script>
+          <p class="strong">只有一行语句时允许不带括号，但需把语句紧跟当前行后。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              if (foo) doSomething();
+              for (var i = 0; i < 10; i++) doSomething();
+            ]]>
+          </script>
+          <p class="strong">语句太长时写成两行，这时请加大括号。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              for (var i = 0; i < 10; i++) 
+                doSomething( very long );
+              // good
+              for (var i = 0; i < 10; i++) { 
+                doSomething( very long );
+              }
+            ]]>
+          </script>
+          <p class="strong">写 else 时不要另起一行。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              if (test) {
+                things1();
+              }
+              else {
+                things3();
+              }
+
+              // good
+              if (test) {
+                things1();
+              } else {
+                things3();
+              }
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">合理的格式化三元运算符</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              var flag1 = veryLooooooooooonnnnggggggCondition ? resultWhenTruth : resultWhenFalsy;
+
+              // good
+              var flag2 = veryLooooooooooonnnnggggggCondition
+                            ? resultWhenTruth
+                            : resultWhenFalsy;
+            ]]>
+          </script>
+        </li>
+      </ul>
+    </div>
+    <div class="unit">
+      <h3>代码注释</h3>
+      <ul>
+        <li>
+          <p class="strong">使用 <code>//</code> 作为注释符，可以使用 <code>/* */</code> 作为多行注释符。注释符号与注释内容之间留空，注释的位置尽量放在代码之上。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              /*not good*/
+              //not good
+              var foo = 'bar'; // not good
+
+              /* good */
+              // good
+              var foo = 'bar';
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">建议在今后需要完善的代码中注释以 <code>// TODO</code>。请在 TODO 后标注你要做的事。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              if (condition) {
+                console.log('尚未实现');
+                // TODO: condition 成立时需要做额外的工作
+              }
+            ]]>
+          </script>
+        </li>
+      </ul>
+    </div>
+    <div class="unit">
+      <h3>定义及命名</h3>
+      <ul>
+        <li>
+          <p class="strong">使用变量之前必须先定义，不要定义全局变量。</p>
+        </li>
+        <li>
+          <p class="strong">如果变量有初始赋值则使用单独的 var。</p>
+          <p>理由：当需要修改变量定义顺序时不容易做整行移动，过不了 eslint 的 indent 验证（？）</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              var hello = 1, world = 2;
+              // not good
+              var hello = arr.pop(),
+                  world = arr.pop();
+              // not good
+              var hello = arr.pop()
+                , world = arr.pop();
+
+              // good
+              var hello = 1;
+              var world = 2;
+              var foo, fee, fxx;
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">变量命名使用以小写字母开头的驼峰命名（camelCase）法。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              var foo_bar = 'hello';
+
+              // good
+              var fooBar = 'hello';
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">常量大写。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              var prefix = 23;
+              var Prefix = 23;
+
+              // good
+              var PREFIX = 23;
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">使用字面量定义。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              var obj = new Object();
+              var array = new Array();
+
+              // good
+              var obj = {};
+              var array = [];
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">建议使用表达式来定义函数，而不是函数语句。</p>
+          <p>理由：因为函数语句是在进入作用域时声明，破坏了程序从上到下的执行顺序。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              function fee() {
+                // ...
+              }
+
+              // good
+              var foo = function() {
+                // ...
+              };
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">自执行函数</p>
+          <p>理由：括号和加号不是上下文无关的，可能受到上文缺分号的影响而出现奇怪的问题，这些问题甚至不会报错，极难调试，所以不推荐此种用法。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              (function() {
+                // ...
+              })();
+              +function() {
+                // ...
+              }();
+
+              // good
+              ~function() {
+                // ...
+              }();
+              void function() {
+                // ...
+              }();
+            ]]>
+          </script>
+        </li>
+      </ul>
+    </div>
+    <div class="unit">
+      <h3>比较及转换</h3>
+      <ul>
+        <li>
+          <p class="strong">比较建议使用 <code>===/!==</code> 而非 <code>==/!=</code>。</p>
+          <p>理由：<code>==</code>可以比转化成同一类型后对值进行比较，规则较为复杂</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+              function foo(a) {
+                if (a == 123) {
+                  // ...
+                }
+              }
+
+              // good
+              function foo(a) {
+                a = Number(a);
+                if (a === 123) {
+                  // ...
+                }
+              }
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">复杂逻辑中建议使用显式转换。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              +num === Number(num);
+              !!bool === Boolean(bool);
+              str + '' === String(str);
+            ]]>
+          </script>
+        </li>
+        <li>
+          <p class="strong">不要使用 parseInt 做整数转换，如需使用 parseInt，请给它传入第二个参数 10，避免老式浏览器的坑（？）。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              var floatValue = 123.456;
+
+              // do not
+              var intValue = parseInt(floatValue);
+
+              // can use it
+              var intValue2 = floatValue | 0;
+
+              // good
+              var intValue3 = Math.floor(floatValue);
+            ]]>
+          </script>
+        </li>
+      </ul>
+    </div>
+    <div class="unit">
+      <h3>避免嵌套过深</h3>
+      <ul>
+        <li class="strong">可以使用 Promise 解决深层嵌套问题。</li>
+        <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // not good
+            async1(function() {
+              // TODO 1
+              async2(function() {
+                // TODO 2
+                async3(function() {
+                  // TODO 3
+                });
+              });
+            });
+
+            // good
+            Promise.resolve()
+              .then(function() {
+                return new Promise(function(resolve) {
+                  async1(resolve);
+                });
+              })
+              .then(function() {
+                // TODO 1
+                return new Promise(function(resolve) {
+                  async2(resolve);
+                });
+              })
+              .then(function() {
+                // TODO 2
+                return new Promise(function(resolve) {
+                  async3(resolve);
+                });
+              })
+              .then(function() {
+                // TODO 3
+              });
+            ]]>
+          </script>
+      </ul>
+    </div>
+    <div class="unit">
+      <h3>禁止事项</h3>
+      <ul class="strong">
+        <li>禁止使用未定义的变量。</li>
+        <li>禁止使用 eval，非用不可时可以使用 Function 构造器替代。</li>
+        <li>禁止使用 with 语句。</li>
+        <li>
+          <p>禁止在块作用域中使用函数声明语句</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              if (true) {
+              // avoid
+              function func1() {
+                // ...
+              }
+              // ok
+              var func2 = function() {
+                // ...
+              };
+            }
+            ]]>
+          </script>
+        </li>        
+        <li>
+          <p>禁止使用 8 进制词法。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              // true
+              if (010 === 8);
+            ]]>
+          </script>
+        </li>
+
+        <li>
+          <p>禁止使用 arguments 映射。</p>
+          <script type="syntaxhighlighter" class="brush: js">
+            <![CDATA[
+              void function(a) {
+                arguments[0]++;
+                // 此处 a 为 2
+              }(1);
+            ]]>
+          </script>
+        </li>
+        <li>禁止使用重名参数。</li>
+        <li>禁止使用保留字做变量名如 interface 等。</li>
+      </ul>
+    </div>
+</div>
