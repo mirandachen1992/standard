@@ -404,15 +404,15 @@
           <script type="syntaxhighlighter" class="brush: js">
             <![CDATA[
               if (true) {
-              // avoid
-              function func1() {
-                // ...
+                // avoid
+                function func1() {
+                  // ...
+                }
+                // ok
+                var func2 = function() {
+                  // ...
+                };
               }
-              // ok
-              var func2 = function() {
-                // ...
-              };
-            }
             ]]>
           </script>
         </li>        
